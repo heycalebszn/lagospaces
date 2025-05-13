@@ -59,7 +59,7 @@ const SignupPage = () => {
       
       <footer className="py-6 px-4 bg-white border-t border-secondary-100">
         <div className="max-w-7xl mx-auto text-center text-sm text-secondary-500">
-          <p>© 2023 LagoSpaces. All rights reserved.</p>
+          <p>© 2025 LagoSpaces. All rights reserved.</p>
         </div>
       </footer>
     </div>

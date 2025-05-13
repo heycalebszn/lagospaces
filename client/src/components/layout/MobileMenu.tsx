@@ -11,8 +11,11 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
   
   // Close menu when location changes (navigating away)
   useEffect(() => {
-    onClose();
-  }, [location.pathname, onClose]);
+    if (isOpen) {
+      // Only close when actually navigating to a new path
+      onClose();
+    }
+  }, [location.pathname]);
   
   // Prevent body scrolling when menu is open
   useEffect(() => {
@@ -37,18 +40,19 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
     { path: '/settings', name: 'Settings' },
   ];
   
-  if (!isOpen) return null;
-  
   return (
-    <div className="fixed inset-0 z-50 lg:hidden">
+    <div className={`fixed inset-0 z-50 lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity animate-fade-in"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
       
       {/* Menu Panel */}
-      <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-xl flex flex-col transform transition-transform duration-300 ease-in-out translate-x-0 animate-slide-in-right">
+      <div 
+        className={`fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-xl flex flex-col transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-[rgb(var(--color-secondary-100))]">
           <h2 className="text-lg font-display font-semibold text-[rgb(var(--color-primary-600))]">LagoSpaces</h2>
