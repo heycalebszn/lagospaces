@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
@@ -10,12 +10,25 @@ const MainLayout = () => {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  
+  // Close mobile menu on window resize if screen becomes larger
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileMenuOpen]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-secondary-50 to-secondary-100">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-[rgb(var(--color-secondary-50))] to-[rgb(var(--color-secondary-100))]">
       <Navbar 
         toggleSidebar={toggleSidebar} 
         toggleMobileMenu={toggleMobileMenu}
+        isMobileMenuOpen={isMobileMenuOpen}
       />
       
       <div className="flex flex-1 overflow-hidden">

@@ -126,7 +126,7 @@ const HomePage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative w-full h-[600px] bg-gradient-to-r from-[rgb(var(--color-primary-900))] to-[rgb(var(--color-primary-700))] mb-16 overflow-hidden">
+      <section className="relative w-full h-[500px] md:h-[600px] bg-gradient-to-r from-[rgb(var(--color-primary-900))] to-[rgb(var(--color-primary-700))] mb-8 md:mb-16 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/70 z-10"></div>
           <img 
@@ -137,18 +137,18 @@ const HomePage = () => {
         </div>
         
         <div className="relative z-20 max-w-7xl mx-auto px-4 h-full flex flex-col justify-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 animate-fade-in max-w-4xl">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-4 md:mb-6 animate-fade-in max-w-4xl">
             Find Your Perfect Space in Lagos
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mb-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mb-6 md:mb-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             Discover stunning properties for rent or sale with our visual-first platform designed for seamless property hunting.
           </p>
           
-          <div className="w-full max-w-4xl glass-panel rounded-2xl overflow-hidden border border-white/20 shadow-2xl backdrop-blur-xl animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div className="w-full max-w-4xl glass-panel rounded-xl md:rounded-2xl overflow-hidden border border-white/20 shadow-2xl backdrop-blur-xl animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:divide-x divide-white/10">
-              <div className="p-4">
-                <label htmlFor="location" className="block text-sm font-medium text-white/80 mb-2">Location</label>
-                <select id="location" name="location" className="input bg-white/80 text-[rgb(var(--color-secondary-900))] font-medium">
+              <div className="p-3 md:p-4">
+                <label htmlFor="location" className="block text-xs md:text-sm font-medium text-white/80 mb-1 md:mb-2">Location</label>
+                <select id="location" name="location" className="input bg-white/80 text-[rgb(var(--color-secondary-900))] font-medium text-sm md:text-base w-full">
                   <option value="">All Locations</option>
                   <option value="lekki">Lekki</option>
                   <option value="ikoyi">Ikoyi</option>
@@ -158,9 +158,9 @@ const HomePage = () => {
                 </select>
               </div>
               
-              <div className="p-4">
-                <label htmlFor="type" className="block text-sm font-medium text-white/80 mb-2">Property Type</label>
-                <select id="type" name="type" className="input bg-white/80 text-[rgb(var(--color-secondary-900))] font-medium">
+              <div className="p-3 md:p-4 border-t md:border-t-0 border-white/10">
+                <label htmlFor="type" className="block text-xs md:text-sm font-medium text-white/80 mb-1 md:mb-2">Property Type</label>
+                <select id="type" name="type" className="input bg-white/80 text-[rgb(var(--color-secondary-900))] font-medium text-sm md:text-base w-full">
                   <option value="">All Types</option>
                   <option value="apartment">Apartment</option>
                   <option value="house">House</option>
@@ -170,9 +170,9 @@ const HomePage = () => {
                 </select>
               </div>
               
-              <div className="p-4">
-                <label htmlFor="price" className="block text-sm font-medium text-white/80 mb-2">Price Range</label>
-                <select id="price" name="price" className="input bg-white/80 text-[rgb(var(--color-secondary-900))] font-medium">
+              <div className="p-3 md:p-4 border-t md:border-t-0 border-white/10">
+                <label htmlFor="price" className="block text-xs md:text-sm font-medium text-white/80 mb-1 md:mb-2">Price Range</label>
+                <select id="price" name="price" className="input bg-white/80 text-[rgb(var(--color-secondary-900))] font-medium text-sm md:text-base w-full">
                   <option value="">Any Price</option>
                   <option value="0-300000">₦0 - ₦300,000</option>
                   <option value="300000-500000">₦300,000 - ₦500,000</option>
@@ -182,9 +182,9 @@ const HomePage = () => {
               </div>
             </div>
             
-            <div className="px-4 py-4 bg-white/10">
-              <button className="btn-accent w-full md:w-auto py-3 px-8 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+            <div className="px-3 md:px-4 py-3 md:py-4 bg-white/10">
+              <button className="btn-accent w-full py-2.5 md:py-3 px-6 md:px-8 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all text-sm md:text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 md:w-5 md:h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
                 Search Properties
