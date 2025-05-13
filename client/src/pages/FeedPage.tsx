@@ -30,7 +30,7 @@ const MOCK_FEED: FeedItem[] = [
     location: 'Victoria Island, Lagos',
     price: 450000,
     currency: '₦',
-    imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=80',
     videoUrl: 'https://example.com/video1.mp4',
     note: 'Stunning ocean view apartment with modern amenities, perfect for young professionals.',
     likes: 245,
@@ -48,7 +48,7 @@ const MOCK_FEED: FeedItem[] = [
     location: 'Lekki Phase 1, Lagos',
     price: 320000,
     currency: '₦',
-    imageUrl: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1000&q=80',
     note: 'Comfortable flat in a secure compound with 24/7 power and water supply.',
     likes: 129,
     comments: 18,
@@ -65,7 +65,7 @@ const MOCK_FEED: FeedItem[] = [
     location: 'Ikoyi, Lagos',
     price: 950000,
     currency: '₦',
-    imageUrl: 'https://images.unsplash.com/photo-1600607687644-a6ed68e3f2ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1600607687644-a6ed68e3f2ce?auto=format&fit=crop&w=1000&q=80',
     videoUrl: 'https://example.com/video3.mp4',
     note: 'Exquisite penthouse with private pool and breathtaking city views.',
     likes: 524,
@@ -84,7 +84,7 @@ const MOCK_FEED: FeedItem[] = [
     location: 'Ikeja GRA, Lagos',
     price: 550000,
     currency: '₦',
-    imageUrl: 'https://images.unsplash.com/photo-1617104678098-de229db51b21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1617104678098-de229db51b21?auto=format&fit=crop&w=1000&q=80',
     note: 'Family-friendly apartment in a quiet neighborhood with excellent amenities.',
     likes: 92,
     comments: 7,
@@ -100,7 +100,7 @@ const MOCK_FEED: FeedItem[] = [
     location: 'Yaba, Lagos',
     price: 250000,
     currency: '₦',
-    imageUrl: 'https://images.unsplash.com/photo-1626178793926-22b28830aa30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1626178793926-22b28830aa30?auto=format&fit=crop&w=1000&q=80',
     videoUrl: 'https://example.com/video5.mp4',
     note: 'Perfect for students or young professionals, located close to tech hubs.',
     likes: 78,
@@ -122,13 +122,23 @@ const formatPrice = (amount: number, currency: string): string => {
 };
 
 // Backup image in case the main one fails to load
-const fallbackImageUrl = 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80';
+const fallbackImageUrl = 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1000&q=80';
+
+// Function to ensure image URLs have the correct format
+const formatImageUrl = (url: string): string => {
+  // Check if it's an Unsplash URL that needs parameters
+  if (url.includes('images.unsplash.com') && !url.includes('?')) {
+    return `${url}?auto=format&fit=crop&w=1000&q=80`;
+  }
+  return url;
+};
 
 const FeedItem = ({ item }: { item: FeedItem }) => {
   const [isLiked, setIsLiked] = useState(item.isLiked || false);
   const [isSaved, setIsSaved] = useState(item.isSaved || false);
   const [likesCount, setLikesCount] = useState(item.likes);
   const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   
   const handleLike = () => {
     if (isLiked) {
@@ -151,7 +161,7 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
   return (
     <div className="relative h-full w-full overflow-hidden">
       {/* Background Image/Video */}
-      <div className="absolute inset-0 bg-secondary-900">
+      <div className="absolute inset-0 bg-[rgb(var(--color-secondary-900))]">
         {item.videoUrl ? (
           <video
             src={item.videoUrl}
@@ -162,15 +172,31 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
             playsInline
           />
         ) : (
-          <img
-            src={imageError ? fallbackImageUrl : item.imageUrl}
-            alt={item.title}
-            className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-            onError={() => setImageError(true)}
-            loading="lazy"
-          />
+          <>
+            {/* Loading indicator */}
+            {!imageLoaded && !imageError && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full border-4 border-white/20 border-t-white animate-spin"></div>
+              </div>
+            )}
+            
+            <img
+              src={imageError ? fallbackImageUrl : formatImageUrl(item.imageUrl)}
+              alt={item.title}
+              className={`h-full w-full object-cover transition-transform duration-500 hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              onError={() => {
+                console.log('Image error loading:', item.imageUrl);
+                setImageError(true);
+              }}
+              onLoad={() => {
+                console.log('Image loaded successfully:', item.imageUrl);
+                setImageLoaded(true);
+              }}
+              loading="eager"
+            />
+          </>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/90 via-secondary-900/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-secondary-900))]/90 via-[rgb(var(--color-secondary-900))]/40 to-transparent" />
       </div>
       
       {/* Content Overlay */}
@@ -178,7 +204,7 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
         <h2 className="text-2xl font-display font-semibold text-white mb-2 drop-shadow-md">{item.title}</h2>
         
         <div className="flex items-center gap-2 mb-3 flex-wrap">
-          <div className="px-3 py-1.5 rounded-xl bg-primary-700/90 backdrop-blur-sm text-white font-semibold shadow-lg transform hover:scale-105 transition-transform">
+          <div className="px-3 py-1.5 rounded-xl bg-[rgb(var(--color-primary-700))]/90 backdrop-blur-sm text-white font-semibold shadow-lg transform hover:scale-105 transition-transform">
             {formatPrice(item.price, item.currency)}
           </div>
           
@@ -192,27 +218,28 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
         </div>
         
         {item.note && (
-          <p className="text-white/90 mb-4 max-w-lg backdrop-blur-sm bg-secondary-900/30 p-3 rounded-lg">
+          <p className="text-white/90 mb-4 max-w-lg backdrop-blur-sm bg-[rgb(var(--color-secondary-900))]/30 p-3 rounded-lg">
             {item.note}
           </p>
         )}
         
         <div className="flex items-center justify-between">
           <Link to={`/profile/${item.owner.id}`} className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/50 bg-secondary-100 flex items-center justify-center shadow-lg group-hover:border-primary-400 transition-all">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/50 bg-[rgb(var(--color-secondary-100))] flex items-center justify-center shadow-lg group-hover:border-[rgb(var(--color-primary-400))] transition-all">
               {item.owner.avatar ? (
                 <img 
-                  src={item.owner.avatar} 
+                  src={formatImageUrl(item.owner.avatar)} 
                   alt={item.owner.name} 
                   className="w-full h-full object-cover" 
                   onError={(e) => {
                     // Fallback to initials if avatar fails to load
                     e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement!.innerHTML = `<span class="text-secondary-700 font-semibold text-sm">${item.owner.name.slice(0, 2).toUpperCase()}</span>`;
+                    e.currentTarget.parentElement!.innerHTML = `<span class="text-[rgb(var(--color-secondary-700))] font-semibold text-sm">${item.owner.name.slice(0, 2).toUpperCase()}</span>`;
                   }}
+                  loading="eager"
                 />
               ) : (
-                <span className="text-secondary-700 font-semibold text-sm">
+                <span className="text-[rgb(var(--color-secondary-700))] font-semibold text-sm">
                   {item.owner.name.slice(0, 2).toUpperCase()}
                 </span>
               )}
@@ -221,7 +248,7 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
               <div className="text-white font-medium flex items-center gap-1">
                 {item.owner.name}
                 {item.owner.isVerified && (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-primary-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-[rgb(var(--color-primary-400))]">
                     <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
                   </svg>
                 )}
@@ -230,7 +257,7 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
             </div>
           </Link>
           
-          <Link to={`/property/${item.id}`} className="bg-primary-600 hover:bg-primary-500 py-2.5 md:py-3 px-5 md:px-6 rounded-xl text-white font-semibold shadow-lg transform hover:scale-105 transition-all">
+          <Link to={`/property/${item.id}`} className="bg-[rgb(var(--color-primary-600))] hover:bg-[rgb(var(--color-primary-500))] py-2.5 md:py-3 px-5 md:px-6 rounded-xl text-white font-semibold shadow-lg transform hover:scale-105 transition-all">
             View Details
           </Link>
         </div>
@@ -272,7 +299,7 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
         <button 
           onClick={() => setIsSaved(!isSaved)}
           className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full backdrop-blur-md shadow-lg ${
-            isSaved ? 'bg-accent-400/90' : 'bg-black/40 hover:bg-black/60'
+            isSaved ? 'bg-[rgb(var(--color-accent-400))]/90' : 'bg-black/40 hover:bg-black/60'
           } transition-all`}
           aria-label="Save"
         >
@@ -302,7 +329,7 @@ const FeedItem = ({ item }: { item: FeedItem }) => {
       {/* Top status bar - new feature */}
       <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center shadow-lg">
+          <div className="w-8 h-8 bg-[rgb(var(--color-primary-600))] rounded-full flex items-center justify-center shadow-lg">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-white">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
