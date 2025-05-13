@@ -358,7 +358,7 @@ const FeedPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeout = useRef<any>(null);
   
   const handleScroll = () => {
     if (!containerRef.current) return;
