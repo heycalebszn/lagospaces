@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary-50: 240 249 255;
+    --color-primary-100: 224 242 254;
+    --color-primary-200: 186 230 253;
+    --color-primary-300: 125 211 252;
+    --color-primary-400: 56 189 248;
+    --color-primary-500: 14 165 233;
+    --color-primary-600: 2 132 199;
+    --color-primary-700: 3 105 161;
+    --color-primary-800: 7 89 133;
+    --color-primary-900: 12 74 110;
+    --color-primary-950: 8 47 73;
+    
+    --color-secondary-50: 248 250 252;
+    --color-secondary-100: 241 245 249;
+    --color-secondary-200: 226 232 240;
+    --color-secondary-300: 203 213 225;
+    --color-secondary-400: 148 163 184;
+    --color-secondary-500: 100 116 139;
+    --color-secondary-600: 71 85 105;
+    --color-secondary-700: 51 65 85;
+    --color-secondary-800: 30 41 59;
+    --color-secondary-900: 15 23 42;
+    --color-secondary-950: 2 6 23;
+    
+    --color-accent-50: 238 242 255;
+    --color-accent-100: 224 231 255;
+    --color-accent-200: 199 210 254;
+    --color-accent-300: 165 180 252;
+    --color-accent-400: 129 140 248;
+    --color-accent-500: 99 102 241;
+    --color-accent-600: 79 70 229;
+    --color-accent-700: 67 56 202;
+    --color-accent-800: 55 48 163;
+    --color-accent-900: 49 46 129;
+    --color-accent-950: 30 27 75;
+    
+    --color-success: 16 185 129;
+    --color-warning: 245 158 11;
+    --color-error: 239 68 68;
+  }
+  
+  body {
+    @apply bg-[rgb(var(--color-secondary-50))] text-[rgb(var(--color-secondary-900))] font-sans antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  * {
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-sm border border-white/20 shadow-lg;
+  }
+  
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply btn bg-[rgb(var(--color-primary-600))] hover:bg-[rgb(var(--color-primary-700))] text-white;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-[rgb(var(--color-secondary-200))] hover:bg-[rgb(var(--color-secondary-300))] text-[rgb(var(--color-secondary-900))];
+  }
+  
+  .btn-accent {
+    @apply btn bg-[rgb(var(--color-accent-600))] hover:bg-[rgb(var(--color-accent-700))] text-white;
+  }
+  
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border border-[rgb(var(--color-secondary-200))] bg-white focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary-500))] focus:border-transparent transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+  
+  .animate-enter {
+    @apply opacity-0 translate-y-4;
+    animation: enter 0.4s ease-out forwards;
+  }
+  
+  @keyframes enter {
+    to {
+      @apply opacity-100 translate-y-0;
+    }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(var(--color-secondary-100));
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-secondary-300));
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-secondary-400));
+}
