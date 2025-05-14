@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
   toggleSidebar: () => void;
@@ -9,7 +9,7 @@ interface NavbarProps {
 
 const Navbar = ({ toggleSidebar, toggleMobileMenu, isMobileMenuOpen }: NavbarProps) => {
   const [searchQuery, setSearchQuery] = useState('');
-  
+  const navigate = useNavigate();
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[rgb(var(--color-secondary-200))] py-3 px-4 md:px-6 flex items-center justify-between gap-4 shadow-sm">
       {/* Logo & Mobile Menu Toggle */}
@@ -48,7 +48,7 @@ const Navbar = ({ toggleSidebar, toggleMobileMenu, isMobileMenuOpen }: NavbarPro
       
       {/* Search Bar */}
       <div className="flex-1 max-w-xl relative hidden md:block">
-        <div className="relative">
+        <div className="relative" onClick={() => navigate('/search')}>
           <input
             type="text"
             placeholder="Search properties, locations..."

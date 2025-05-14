@@ -3,10 +3,19 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import MobileMenu from './MobileMenu';
+import Footer from './Footer';
+import NotificationBanner from './NotificationBanner';
+
+interface NotificationState {
+  message: string;
+  type: 'success' | 'warning' | 'error' | 'info';
+  isVisible: boolean;
+}
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [notification, setNotification] = useState<NotificationState | null>(null);
   const location = useLocation();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -30,6 +39,32 @@ const MainLayout = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobileMenuOpen]);
 
+  // Close sidebar and mobile menu when route changes
+  useEffect(() => {
+    setIsSidebarOpen(false);
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+  
+  // Example of how to show a notification (this can be exposed via context in a real app)
+  const showNotification = (message: string, type: 'success' | 'warning' | 'error' | 'info' = 'info') => {
+    setNotification({
+      message,
+      type,
+      isVisible: true
+    });
+  };
+
+  console.log(showNotification)
+  
+  // Hide the notification
+  const hideNotification = () => {
+    setNotification(null);
+  };
+  
+  // Determine if we should show the footer
+  // We might want to hide it on certain pages like the feed
+  const shouldShowFooter = !location.pathname.includes('/feed');
+  
   // Mobile navigation items
   const mobileNavItems = [
     { path: '/', name: 'Home', icon: (
@@ -103,6 +138,17 @@ const MainLayout = () => {
       </div>
       
       <MobileMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />
+      
+      {shouldShowFooter && <Footer />}
+      
+      {/* Notification Banner */}
+      {notification && notification.isVisible && (
+        <NotificationBanner 
+          message={notification.message}
+          type={notification.type}
+          onClose={hideNotification}
+        />
+      )}
     </div>
   );
 };
