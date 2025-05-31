@@ -14,6 +14,7 @@ import SettingsPage from './pages/SettingsPage';
 import ComingSoonPage from './pages/ComingSoonPage';
 import MessagesPage from './pages/MessagesPage';
 import NotificationsPage from './pages/NotificationsPage';
+import { AuthProvider } from './context/AuthContext';
 import './App.css';
 
 // Authentication result pages
@@ -49,48 +50,50 @@ const PostSuccessPage = () => (
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Initial loading screen */}
-        <Route path="/" element={<LoadingScreen />} />
-        
-        {/* Auth routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/signup-success" element={<SignupSuccessPage />} />
-        <Route path="/forgot-password" element={<ComingSoonPage />} />
-        <Route path="/post-success" element={<PostSuccessPage />} />
-        
-        {/* Main app routes */}
-        <Route path="/" element={<MainLayout />}>
-          <Route path="home" element={<HomePage />} />
-          <Route path="feed" element={<FeedPage />} />
-          <Route path="property/:id" element={<PropertyListingPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="profile/:id" element={<ProfilePage />} />
-          <Route path="search" element={<SearchPage />} />
-          <Route path="saved" element={<SavedPropertiesPage />} />
-          <Route path="post" element={<PostPropertyPage />} />
-          <Route path="settings" element={<SettingsPage />} />
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Initial loading screen */}
+          <Route path="/" element={<LoadingScreen />} />
           
-          {/* Coming Soon pages */}
-          <Route path="messages" element={<MessagesPage />} />
-          <Route path="messages/:id" element={<ComingSoonPage />} />
-          <Route path="notifications" element={<NotificationsPage />} />
-          <Route path="help" element={<ComingSoonPage />} />
-          <Route path="blog" element={<ComingSoonPage />} />
-          <Route path="guide" element={<ComingSoonPage />} />
-          <Route path="verification" element={<ComingSoonPage />} />
-          <Route path="terms" element={<ComingSoonPage />} />
-          <Route path="privacy" element={<ComingSoonPage />} />
-          <Route path="cookies" element={<ComingSoonPage />} />
-          <Route path="refunds" element={<ComingSoonPage />} />
+          {/* Auth routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/signup-success" element={<SignupSuccessPage />} />
+          <Route path="/forgot-password" element={<ComingSoonPage />} />
+          <Route path="/post-success" element={<PostSuccessPage />} />
           
-          {/* Catch all route */}
-          <Route path="*" element={<ComingSoonPage />} />
-        </Route>
-      </Routes>
-    </Router>
+          {/* Main app routes */}
+          <Route path="/" element={<MainLayout />}>
+            <Route path="home" element={<HomePage />} />
+            <Route path="feed" element={<FeedPage />} />
+            <Route path="property/:id" element={<PropertyListingPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="profile/:id" element={<ProfilePage />} />
+            <Route path="search" element={<SearchPage />} />
+            <Route path="saved" element={<SavedPropertiesPage />} />
+            <Route path="post" element={<PostPropertyPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+            
+            {/* Coming Soon pages */}
+            <Route path="messages" element={<MessagesPage />} />
+            <Route path="messages/:id" element={<ComingSoonPage />} />
+            <Route path="notifications" element={<NotificationsPage />} />
+            <Route path="help" element={<ComingSoonPage />} />
+            <Route path="blog" element={<ComingSoonPage />} />
+            <Route path="guide" element={<ComingSoonPage />} />
+            <Route path="verification" element={<ComingSoonPage />} />
+            <Route path="terms" element={<ComingSoonPage />} />
+            <Route path="privacy" element={<ComingSoonPage />} />
+            <Route path="cookies" element={<ComingSoonPage />} />
+            <Route path="refunds" element={<ComingSoonPage />} />
+            
+            {/* Catch all route */}
+            <Route path="*" element={<ComingSoonPage />} />
+          </Route>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

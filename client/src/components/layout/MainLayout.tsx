@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import MobileMenu from './MobileMenu';
 import Footer from './Footer';
 import NotificationBanner from './NotificationBanner';
+import { useAuth } from '../../context/AuthContext';
 
 interface NotificationState {
   message: string;
@@ -17,6 +18,7 @@ const MainLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [notification, setNotification] = useState<NotificationState | null>(null);
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const toggleMobileMenu = () => {
@@ -97,51 +99,56 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-[rgb(var(--color-secondary-50))] to-[rgb(var(--color-secondary-100))]">
       <Navbar 
-        toggleSidebar={toggleSidebar} 
+        toggleSidebar={isAuthenticated ? toggleSidebar : undefined} 
         toggleMobileMenu={toggleMobileMenu}
         isMobileMenuOpen={isMobileMenuOpen}
       />
       
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar isOpen={isSidebarOpen} />
+        {isAuthenticated && <Sidebar isOpen={isSidebarOpen} />}
         
-        <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8 transition-all duration-300 pb-20 md:pb-8">
-          <div className="max-w-7xl mx-auto">
+        <main className={`flex-1 overflow-auto transition-all duration-300 ${
+          !isAuthenticated && location.pathname === '/home' ? 'p-0' : 'p-4 md:p-6 lg:p-8 pb-20 md:pb-8'
+        }`}>
+          <div className={`${
+            !isAuthenticated && location.pathname === '/home' ? '' : 'max-w-7xl mx-auto'
+          }`}>
             <Outlet />
           </div>
         </main>
       </div>
       
-      {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[rgb(var(--color-secondary-200))] shadow-lg z-40">
-        <div className="flex items-center justify-around">
-          {mobileNavItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex flex-col items-center py-3 px-2 ${
-                  isActive 
-                    ? 'text-[rgb(var(--color-primary-600))]' 
-                    : 'text-[rgb(var(--color-secondary-500))]'
-                }`}
-              >
-                <div className={`${isActive ? 'text-[rgb(var(--color-primary-600))]' : ''}`}>
-                  {item.icon}
-                </div>
-                <span className="text-xs mt-1">{item.name}</span>
-              </Link>
-            );
-          })}
+      {/* Mobile Bottom Navigation - Only show when authenticated */}
+      {isAuthenticated && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[rgb(var(--color-secondary-200))] shadow-lg z-40">
+          <div className="flex items-center justify-around">
+            {mobileNavItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`flex flex-col items-center py-3 px-2 ${
+                    isActive 
+                      ? 'text-[rgb(var(--color-primary-600))]' 
+                      : 'text-[rgb(var(--color-secondary-500))]'
+                  }`}
+                >
+                  <div className={`${isActive ? 'text-[rgb(var(--color-primary-600))]' : ''}`}>
+                    {item.icon}
+                  </div>
+                  <span className="text-xs mt-1">{item.name}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
       
-      <MobileMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />
+      {isAuthenticated && <MobileMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />}
       
       {shouldShowFooter && <Footer />}
       
-      {/* Notification Banner */}
       {notification && notification.isVisible && (
         <NotificationBanner 
           message={notification.message}

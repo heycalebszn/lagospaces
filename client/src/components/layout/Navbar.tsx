@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Logo';
 
 interface NavbarProps {
-  toggleSidebar: () => void;
+  toggleSidebar?: () => void;
   toggleMobileMenu: () => void;
   isMobileMenuOpen?: boolean;
 }
@@ -32,15 +32,17 @@ const Navbar = ({ toggleSidebar, toggleMobileMenu, isMobileMenuOpen }: NavbarPro
           )}
         </button>
         
-        <button
-          onClick={toggleSidebar}
-          className="hidden md:flex w-10 h-10 rounded-full hover:bg-[rgb(var(--color-secondary-100))] transition-colors items-center justify-center"
-          aria-label="Toggle sidebar"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </button>
+        {toggleSidebar && (
+          <button
+            onClick={toggleSidebar}
+            className="hidden md:flex w-10 h-10 rounded-full hover:bg-[rgb(var(--color-secondary-100))] transition-colors items-center justify-center"
+            aria-label="Toggle sidebar"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        )}
         
         <Link to="/" className="flex items-center">
           <Logo variant="default" size="md" />
