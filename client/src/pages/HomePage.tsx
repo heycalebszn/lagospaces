@@ -122,167 +122,75 @@ const MOCK_PROPERTIES = [
 
 const HomePage = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'feed'>('grid');
-  const [propertyType, setPropertyType] = useState('');
-  const [location, setLocation] = useState('');
-  const [priceRange, setPriceRange] = useState('');
   
   return (
     <div>
       {/* Hero Section */}
       <section className="relative w-full h-screen max-h-[700px] bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80 z-10"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1800&q=80" 
-          alt="Luxury waterfront property" 
-          className="w-full h-full object-cover object-center scale-105 motion-safe:animate-[pulse_15s_ease-in-out_infinite]"
-          loading="eager"
-        />
-      </div>
-      
-      {/* Content Container */}
-      <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-start">
-        {/* Main Content */}
-        <div className="max-w-3xl">
-          {/* Logo Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 animate-fade-in border border-white/10">
-            <span className="text-white/90 font-semibold">LAGOSPACES</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span className="text-white/70 text-sm">Verified Direct Listings</span>
-          </div>
-          
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6 animate-fade-in">
-            Find Your Home,<br />
-            <span className="text-emerald-400">Direct from Owners</span>
-          </h1>
-          
-          {/* Subheading */}
-          <p className="text-lg md:text-xl text-white/80 max-w-xl mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            LAGOSPACES eliminates middlemen by directly connecting you with verified property owners. Find your perfect space in Lagos without agent fees.
-          </p>
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1800&q=80" 
+            alt="Luxury waterfront property" 
+            className="w-full h-full object-cover object-center scale-105 motion-safe:animate-[pulse_15s_ease-in-out_infinite]"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80"></div>
         </div>
         
-        {/* Search Panel */}
-        <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/20 shadow-2xl animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          {/* Search Form */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
-            {/* Location Filter */}
-            <div className="p-4 lg:border-r border-white/10">
-              <label htmlFor="location" className="flex items-center gap-2 text-sm font-medium text-white/90 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-emerald-400">
-                  <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
-                </svg>
-                Location
-              </label>
-              <select 
-                id="location" 
-                name="location" 
-                className="w-full bg-white/20 border border-white/10 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              >
-                <option value="" className="bg-slate-800 text-white">All Locations</option>
-                <option value="lekki" className="bg-slate-800 text-white">Lekki</option>
-                <option value="ikoyi" className="bg-slate-800 text-white">Ikoyi</option>
-                <option value="vi" className="bg-slate-800 text-white">Victoria Island</option>
-                <option value="ikeja" className="bg-slate-800 text-white">Ikeja</option>
-                <option value="yaba" className="bg-slate-800 text-white">Yaba</option>
-              </select>
+        {/* Content Container */}
+        <div className="relative z-10 w-full h-full flex items-center justify-center">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              {/* Logo Badge */}
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 animate-fade-in border border-white/10">
+                <span className="text-white/90 font-semibold">Rentas</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span className="text-white/70 text-sm">Verified Direct Listings</span>
+              </div>
+              
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6 animate-fade-in">
+                Find Your Home,<br />
+                <span className="text-emerald-400">Direct from Owners</span>
+              </h1>
+              
+              {/* Subheading */}
+              <p className="text-lg md:text-xl text-white/80 max-w-xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                Rent direct, save big—property owners list for free and connect instantly with verified tenants, while renters find trusted homes without agent fees.
+              </p>
+              
+              {/* Benefits Badges */}
+              <div className="flex flex-wrap gap-3 justify-center mt-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-emerald-400">
+                    <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-white text-sm font-medium">Verified Owners</span>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-emerald-400">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                  </svg>
+                  <span className="text-white text-sm font-medium">No Agent Fees</span>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-emerald-400">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                  <span className="text-white text-sm font-medium">Secure Payments</span>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-emerald-400">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-white text-sm font-medium">24/7 Support</span>
+                </div>
+              </div>
             </div>
-            
-            {/* Property Type Filter */}
-            <div className="p-4 border-t lg:border-t-0 lg:border-r border-white/10">
-              <label htmlFor="type" className="flex items-center gap-2 text-sm font-medium text-white/90 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-emerald-400">
-                  <path d="M19.006 3.705a.75.75 0 00-.512-1.41L6 6.838V3a.75.75 0 00-.75-.75h-1.5A.75.75 0 003 3v4.93l-1.006.365a.75.75 0 00.512 1.41l16.5-6z" />
-                  <path fillRule="evenodd" d="M3.019 11.115L18 5.667V9.09l4.006 1.456a.75.75 0 11-.512 1.41l-.494-.18v8.475h.75a.75.75 0 010 1.5H2.25a.75.75 0 010-1.5H3v-9.129l.019-.006zM18 20.25v-9.565l1.5.545v9.02H18zm-9-6a.75.75 0 00-.75.75v4.5c0 .414.336.75.75.75h3a.75.75 0 00.75-.75V15a.75.75 0 00-.75-.75H9z" clipRule="evenodd" />
-                </svg>
-                Property Type
-              </label>
-              <select 
-                id="type" 
-                name="type" 
-                className="w-full bg-white/20 border border-white/10 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
-                value={propertyType}
-                onChange={(e) => setPropertyType(e.target.value)}
-              >
-                <option value="" className="bg-slate-800 text-white">All Types</option>
-                <option value="apartment" className="bg-slate-800 text-white">Apartment</option>
-                <option value="house" className="bg-slate-800 text-white">House</option>
-                <option value="villa" className="bg-slate-800 text-white">Villa</option>
-                <option value="studio" className="bg-slate-800 text-white">Studio</option>
-                <option value="land" className="bg-slate-800 text-white">Land</option>
-              </select>
-            </div>
-            
-            {/* Price Range Filter */}
-            <div className="p-4 border-t lg:border-t-0 border-white/10">
-              <label htmlFor="price" className="flex items-center gap-2 text-sm font-medium text-white/90 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-emerald-400">
-                  <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
-                  <path fillRule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z" clipRule="evenodd" />
-                  <path d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z" />
-                </svg>
-                Price Range
-              </label>
-              <select 
-                id="price" 
-                name="price" 
-                className="w-full bg-white/20 border border-white/10 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
-                value={priceRange}
-                onChange={(e) => setPriceRange(e.target.value)}
-              >
-                <option value="" className="bg-slate-800 text-white">Any Price</option>
-                <option value="0-300000" className="bg-slate-800 text-white">₦0 - ₦300,000</option>
-                <option value="300000-500000" className="bg-slate-800 text-white">₦300,000 - ₦500,000</option>
-                <option value="500000-800000" className="bg-slate-800 text-white">₦500,000 - ₦800,000</option>
-                <option value="800000-" className="bg-slate-800 text-white">₦800,000+</option>
-              </select>
-            </div>
-          </div>
-          
-          {/* Search Button */}
-          <div className="p-4 bg-emerald-500/20 border-t border-white/10">
-            <button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-emerald-500/30">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-              </svg>
-              Search Properties
-            </button>
           </div>
         </div>
-        
-        {/* Benefits Badges */}
-        <div className="flex flex-wrap gap-3 mt-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-emerald-400">
-              <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
-            </svg>
-            <span className="text-white text-sm font-medium">Verified Owners</span>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-emerald-400">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-            </svg>
-            <span className="text-white text-sm font-medium">No Agent Fees</span>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-emerald-400">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-            </svg>
-            <span className="text-white text-sm font-medium">Secure Payments</span>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-emerald-400">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="text-white text-sm font-medium">24/7 Support</span>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
       
       {/* Featured Properties */}
       <section className="max-w-7xl mx-auto px-4 mb-16 mt-16">

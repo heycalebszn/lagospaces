@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './components/layout';
+import LoadingScreen from './components/LoadingScreen';
 import HomePage from './pages/HomePage';
 import FeedPage from './pages/FeedPage';
 import LoginPage from './pages/LoginPage';
@@ -12,8 +13,8 @@ import PostPropertyPage from './pages/PostPropertyPage';
 import SettingsPage from './pages/SettingsPage';
 import ComingSoonPage from './pages/ComingSoonPage';
 import MessagesPage from './pages/MessagesPage';
-import './App.css';
 import NotificationsPage from './pages/NotificationsPage';
+import './App.css';
 
 // Authentication result pages
 const SignupSuccessPage = () => (
@@ -50,6 +51,9 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Initial loading screen */}
+        <Route path="/" element={<LoadingScreen />} />
+        
         {/* Auth routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -59,7 +63,7 @@ function App() {
         
         {/* Main app routes */}
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
+          <Route path="home" element={<HomePage />} />
           <Route path="feed" element={<FeedPage />} />
           <Route path="property/:id" element={<PropertyListingPage />} />
           <Route path="profile" element={<ProfilePage />} />

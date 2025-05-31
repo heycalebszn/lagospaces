@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from '../Logo';
 
 interface NavbarProps {
   toggleSidebar: () => void;
@@ -16,7 +17,7 @@ const Navbar = ({ toggleSidebar, toggleMobileMenu, isMobileMenuOpen }: NavbarPro
       <div className="flex items-center gap-4">
         <button 
           onClick={toggleMobileMenu}
-          className="md:hidden p-2 rounded-full hover:bg-[rgb(var(--color-secondary-100))] transition-colors"
+          className="md:hidden w-10 h-10 rounded-full hover:bg-[rgb(var(--color-secondary-100))] transition-colors flex items-center justify-center"
           aria-label="Toggle mobile menu"
           aria-expanded={isMobileMenuOpen}
         >
@@ -33,7 +34,7 @@ const Navbar = ({ toggleSidebar, toggleMobileMenu, isMobileMenuOpen }: NavbarPro
         
         <button
           onClick={toggleSidebar}
-          className="hidden md:flex p-2 rounded-full hover:bg-[rgb(var(--color-secondary-100))] transition-colors"
+          className="hidden md:flex w-10 h-10 rounded-full hover:bg-[rgb(var(--color-secondary-100))] transition-colors items-center justify-center"
           aria-label="Toggle sidebar"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -41,8 +42,8 @@ const Navbar = ({ toggleSidebar, toggleMobileMenu, isMobileMenuOpen }: NavbarPro
           </svg>
         </button>
         
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-[rgb(var(--color-primary-600))] font-display font-bold text-xl">LagoSpaces</span>
+        <Link to="/" className="flex items-center">
+          <Logo variant="default" size="md" />
         </Link>
       </div>
       
