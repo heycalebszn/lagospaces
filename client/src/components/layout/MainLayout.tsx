@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import MobileMenu from './MobileMenu';
 import Footer from './Footer';
 import NotificationBanner from './NotificationBanner';
+import RouteTransition from './RouteTransition';
 import { useAuth } from '../../context/AuthContext';
 
 interface NotificationState {
@@ -98,6 +99,7 @@ const MainLayout = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-[rgb(var(--color-secondary-50))] to-[rgb(var(--color-secondary-100))]">
+      <RouteTransition />
       <Navbar 
         toggleSidebar={toggleSidebar}
         toggleMobileMenu={toggleMobileMenu}
