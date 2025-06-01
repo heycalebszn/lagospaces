@@ -43,7 +43,7 @@ const LoginPage = () => {
       <header className="bg-white py-4 px-8 shadow-sm">
         <div className="max-w-7xl mx-auto">
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-primary-600 font-display font-bold text-xl">LagoSpaces</span>
+            <span className="text-primary-600 font-display font-bold text-xl">Rentas</span>
           </Link>
         </div>
       </header>
@@ -60,7 +60,7 @@ const LoginPage = () => {
       
       <footer className="py-6 px-4 bg-white border-t border-secondary-100">
         <div className="max-w-7xl mx-auto text-center text-sm text-secondary-500">
-          <p>© 2025 LagoSpaces. All rights reserved.</p>
+          <p>© 2025 Rentas. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -10,10 +10,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-[rgb(var(--color-primary-600))] rounded-lg flex items-center justify-center text-white font-bold">
-                LS
+              <div className="w-10 h-10 bg-[rgb(var(--color-primary-600))] rounded-lg flex items-center justify-center text-white font-display font-bold">
+                RN
               </div>
-              <div className="text-xl font-display font-semibold">LAGOSPACES</div>
+              <div className="text-xl font-display font-semibold">Rentas</div>
             </div>
             <p className="text-[rgb(var(--color-secondary-300))] mb-4">
               Eliminating middlemen by directly connecting verified landlords with prospective tenants.
@@ -98,7 +98,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-[rgb(var(--color-secondary-800))] mt-8 pt-6 text-center text-[rgb(var(--color-secondary-400))] text-sm">
-          <p>© {currentYear} LAGOSPACES. All rights reserved.</p>
+          <p>© {currentYear} Rentas. All rights reserved.</p>
           <p className="mt-2">Designed and developed with ❤️ in Lagos, Nigeria.</p>
         </div>
       </div>

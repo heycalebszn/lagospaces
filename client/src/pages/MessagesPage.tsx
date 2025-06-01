@@ -202,6 +202,7 @@ const MOCK_MESSAGES = {
 
 const MessagesPage = () => {
   const [activeChatId, setActiveChatId] = useState<string | undefined>(undefined);
+  const [showChatList, setShowChatList] = useState(true);
   
   const activeChat = MOCK_CHATS.find(chat => chat.id === activeChatId);
   const messages = activeChatId ? MOCK_MESSAGES[activeChatId as keyof typeof MOCK_MESSAGES] || [] : [];
@@ -213,23 +214,60 @@ const MessagesPage = () => {
     // For mock purposes, we would add the message to the conversation
     // and update the chat list, but this is just a prototype
   };
+
+  const handleChatSelect = (chatId: string) => {
+    setActiveChatId(chatId);
+    setShowChatList(false); // Hide chat list on mobile when a chat is selected
+  };
   
   return (
     <div className="h-[calc(100vh-74px)] flex bg-white">
-      <div className="w-full md:w-1/3 lg:w-1/4 border-r border-secondary-200">
+      {/* Chat List - Always visible on desktop, conditionally visible on mobile */}
+      <div className={`w-full md:w-1/3 lg:w-1/4 border-r border-secondary-200 ${
+        !showChatList ? 'hidden md:block' : ''
+      }`}>
         <ChatList
           chats={MOCK_CHATS}
           activeChat={activeChatId}
-          onChatSelect={setActiveChatId}
+          onChatSelect={handleChatSelect}
         />
       </div>
       
-      <div className="hidden md:block md:w-2/3 lg:w-3/4">
-        <ChatWindow
-          user={activeChat?.user}
-          messages={messages}
-          onSendMessage={handleSendMessage}
-        />
+      {/* Chat Window - Always visible on desktop, conditionally visible on mobile */}
+      <div className={`w-full md:w-2/3 lg:w-3/4 ${
+        showChatList ? 'hidden md:block' : ''
+      }`}>
+        {activeChat ? (
+          <>
+            {/* Mobile Back Button */}
+            <div className="md:hidden border-b border-secondary-200 p-2">
+              <button
+                onClick={() => setShowChatList(true)}
+                className="p-2 hover:bg-secondary-50 rounded-lg text-secondary-600 flex items-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                <span>Back to Messages</span>
+              </button>
+            </div>
+            <ChatWindow
+              user={activeChat.user}
+              messages={messages}
+              onSendMessage={handleSendMessage}
+            />
+          </>
+        ) : (
+          <div className="h-full flex items-center justify-center bg-secondary-50">
+            <div className="text-center text-secondary-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-16 h-16 mx-auto mb-4 opacity-50">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+              </svg>
+              <p className="text-lg font-display font-medium">Select a conversation</p>
+              <p className="mt-2">Choose a chat from the list to start messaging</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

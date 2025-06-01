@@ -63,7 +63,7 @@ const MOCK_NOTIFICATIONS: Notification[] = [
     id: '5',
     type: 'system',
     title: 'Verification Complete',
-    message: 'Your identity has been successfully verified. You can now access all features of LAGOSPACES.',
+    message: 'Your identity has been successfully verified. You can now access all features of Rentas.',
     timestamp: '2024-05-04T12:00:00Z',
     isRead: true
   },

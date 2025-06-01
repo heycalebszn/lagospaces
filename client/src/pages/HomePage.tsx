@@ -259,7 +259,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-display font-semibold mb-4">Are you a Property Owner?</h2>
           <p className="max-w-2xl mx-auto mb-8 text-[rgb(var(--color-accent-100))]">
-            List your property on LAGOSPACES and connect directly with verified tenants. No more dealing with agents or payment delays.
+            List your property on Rentas and connect directly with verified tenants. No more dealing with agents or payment delays.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="btn bg-white text-[rgb(var(--color-accent-700))] hover:bg-[rgb(var(--color-accent-50))] px-8 py-3">
@@ -275,7 +275,7 @@ const HomePage = () => {
       {/* New How It Works Section */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-display font-semibold text-[rgb(var(--color-secondary-900))] mb-4">How LAGOSPACES Works</h2>
+          <h2 className="text-2xl md:text-3xl font-display font-semibold text-[rgb(var(--color-secondary-900))] mb-4">How Rentas Works</h2>
           <p className="text-[rgb(var(--color-secondary-500))] max-w-2xl mx-auto">
             Our platform connects verified landlords with serious tenants, eliminating middlemen and reducing costs.
           </p>

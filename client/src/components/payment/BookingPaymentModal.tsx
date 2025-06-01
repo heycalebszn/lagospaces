@@ -364,7 +364,7 @@ const BookingPaymentModal = ({
                   <ul className="list-disc list-inside space-y-1">
                     <li>This fee is fully refundable if you visit the property within 7 days.</li>
                     <li>If the owner fails to accommodate your visit, you will receive a full refund.</li>
-                    <li>If you fail to visit the property within 7 days, the fee will be split between LAGOSPACES and the property owner.</li>
+                    <li>If you fail to visit the property within 7 days, the fee will be split between Rentas and the property owner.</li>
                     <li>Upon visiting the property, please ask the owner to confirm your visit through the platform.</li>
                   </ul>
                 </div>

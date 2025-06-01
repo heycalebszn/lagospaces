@@ -55,7 +55,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-[rgb(var(--color-secondary-100))]">
-          <h2 className="text-lg font-display font-semibold text-[rgb(var(--color-primary-600))]">LagoSpaces</h2>
+          <h2 className="text-lg font-display font-semibold text-[rgb(var(--color-primary-600))]">Rentas</h2>
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-[rgb(var(--color-secondary-100))]"

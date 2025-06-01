@@ -114,7 +114,7 @@ const PostPropertyPage = () => {
         <div className="max-w-3xl mx-auto">
           <h1 className="text-2xl font-display font-bold mb-2">List Your Property</h1>
           <p className="text-[rgb(var(--color-secondary-600))] mb-6">
-            Fill in the details below to list your property on LAGOSPACES.
+            Fill in the details below to list your property on Rentas.
           </p>
           
           {/* Progress Bar */}

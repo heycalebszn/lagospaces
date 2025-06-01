@@ -57,7 +57,7 @@ const SignupForm = ({ onSubmit, isLoading = false, error }: SignupFormProps) => 
     <div className="w-full max-w-md">
       <div className="text-center mb-8">
         <h1 className="text-2xl font-display font-bold text-secondary-900 mb-2">Create an Account</h1>
-        <p className="text-secondary-600">Join LagoSpaces to find your perfect space</p>
+        <p className="text-secondary-600">Join Rentas to find your perfect space</p>
       </div>
       
       {error && (
