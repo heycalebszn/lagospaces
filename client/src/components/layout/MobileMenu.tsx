@@ -12,7 +12,6 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
   // Close menu when location changes (navigating away)
   useEffect(() => {
     if (isOpen) {
-      // Only close when actually navigating to a new path
       onClose();
     }
   }, [location.pathname]);
@@ -40,8 +39,10 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
     { path: '/settings', name: 'Settings' },
   ];
   
+  if (!isOpen) return null;
+  
   return (
-    <div className={`fixed inset-0 z-50 lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
+    <div className="fixed inset-0 z-50 lg:hidden">
       {/* Backdrop */}
       <div 
         className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
@@ -50,7 +51,9 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
       
       {/* Menu Panel */}
       <div 
-        className={`fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-xl flex flex-col transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-xl flex flex-col transform transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
         onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
       >
         {/* Header */}

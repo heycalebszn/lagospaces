@@ -22,7 +22,7 @@ const MainLayout = () => {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prevState => !prevState);
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
   
   const closeMobileMenu = () => {
@@ -99,7 +99,7 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-[rgb(var(--color-secondary-50))] to-[rgb(var(--color-secondary-100))]">
       <Navbar 
-        toggleSidebar={isAuthenticated ? toggleSidebar : undefined} 
+        toggleSidebar={toggleSidebar}
         toggleMobileMenu={toggleMobileMenu}
         isMobileMenuOpen={isMobileMenuOpen}
       />
@@ -119,7 +119,7 @@ const MainLayout = () => {
       </div>
       
       {/* Mobile Bottom Navigation - Only show when authenticated */}
-      {isAuthenticated && (
+      {isAuthenticated && !isMobileMenuOpen && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[rgb(var(--color-secondary-200))] shadow-lg z-40">
           <div className="flex items-center justify-around">
             {mobileNavItems.map((item) => {
@@ -145,7 +145,11 @@ const MainLayout = () => {
         </div>
       )}
       
-      {isAuthenticated && <MobileMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />}
+      {/* Mobile Menu */}
+      <MobileMenu 
+        isOpen={isMobileMenuOpen} 
+        onClose={closeMobileMenu}
+      />
       
       {shouldShowFooter && <Footer />}
       
